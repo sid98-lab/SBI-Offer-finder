@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Cartwise — SBI Offer Finder",
+  "version": "0.1.1",
+  "description": "Compare Amazon.in cart items with similar products and inspect product-level SBI bank offer evidence.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.amazon.in/*", "https://amazon.in/*"],
+  "icons": {"16": "assets/icon-16.png", "32": "assets/icon-32.png", "48": "assets/icon-48.png", "128": "assets/icon-128.png"},
+  "action": {"default_title": "Find SBI offers for your Amazon cart", "default_icon": {"16": "assets/icon-16.png", "32": "assets/icon-32.png"}},
+  "background": {"service_worker": "background.js"},
+  "content_scripts": [{
+    "matches": [
+      "https://www.amazon.in/gp/cart/*", "https://amazon.in/gp/cart/*",
+      "https://www.amazon.in/cart/*", "https://amazon.in/cart/*",
+      "https://www.amazon.in/dp/*", "https://amazon.in/dp/*",
+      "https://www.amazon.in/*/dp/*", "https://amazon.in/*/dp/*",
+      "https://www.amazon.in/gp/product/*", "https://amazon.in/gp/product/*",
+      "https://www.amazon.in/s*", "https://amazon.in/s*"
+    ],
+    "js": ["core.js", "parser.js", "content.js"],
+    "run_at": "document_idle"
+  }],
+  "content_security_policy": {"extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"}
+}

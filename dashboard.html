@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Cartwise · SBI offer finder</title>
+  <link rel="icon" href="assets/icon-32.png">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="dashboard.html" aria-label="Cartwise home"><span class="brand-mark">c<span>✦</span></span>cartwise<span class="brand-dot">.</span></a>
+    <span class="topbar-description">A little more thoughtful. A little more saved.</span>
+    <span class="privacy-pill"><span class="status-dot"></span> On-device & private</span>
+  </header>
+  <main class="shell">
+    <section class="hero" aria-labelledby="heading">
+      <div>
+        <p class="eyebrow"><span class="spark">✦</span> YOUR FESTIVAL SHOPPING COMPANION</p>
+        <h1 id="heading">Same wishlist.<br><em>Smarter cart.</em></h1>
+        <p class="hero-description">Find similar products with SBI card offers.<br>Compare the details, then make the switch on Amazon.</p>
+        <div class="hero-actions"><button class="button primary" id="scan">Scan my Amazon cart <span aria-hidden="true">↗</span></button><button class="button text-button" id="demo">Try a sample cart <span aria-hidden="true">→</span></button></div>
+        <p id="startup-note" class="startup-note" role="status">Preparing the cart scanner… If this stays here, reload Cartwise on chrome://extensions and refresh your Amazon cart.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="art-spark spark-one">✳</div><div class="art-spark spark-two">✦</div>
+        <div class="shopping-bag"><div class="bag-handle"></div><span>good<br>things<br><em>ahead.</em></span><div class="bag-star">✦</div></div>
+        <div class="bank-card"><span class="card-chip"></span><span class="card-bank">SBI CARD</span><span class="card-digits">•••• &nbsp; ••••</span><span class="card-caption">A better way to shop</span></div>
+        <div class="art-label"><span class="status-dot"></span> Find your next good deal</div>
+      </div>
+    </section>
+    <div id="demo-banner" class="demo-banner" hidden><strong>Sample cart</strong> Illustrative products, prices and offers. Nothing here is live Amazon data.<button id="exit-demo" class="text-button">Exit sample ×</button></div>
+    <section class="summary" aria-label="Scan summary">
+      <div><span class="summary-icon">▤</span><div><span class="summary-label">IN YOUR CART</span><p><strong id="item-count">—</strong><span>products</span></p></div></div>
+      <div><span class="summary-icon">✦</span><div><span class="summary-label">SBI OFFER EVIDENCE</span><p><strong id="match-count">—</strong><span>similar products</span></p></div></div>
+      <div><span class="summary-icon">↗</span><div><span class="summary-label">READY TO EXPLORE</span><p><strong id="alternative-count">—</strong><span>alternatives</span></p></div></div>
+      <div class="summary-note">Good deals start with<br><strong>the right comparison.</strong></div>
+    </section>
+    <div class="workspace">
+      <aside class="sidebar">
+        <div class="sidebar-heading"><span class="eyebrow">MAKE IT YOURS</span><h2>Your preferences</h2></div>
+        <label for="mode" class="field-label">How will you pay?</label>
+        <select id="mode"><option value="credit">SBI credit card</option><option value="debit">SBI debit card</option><option value="emi">SBI credit card EMI</option></select>
+        <div class="range-heading"><label for="price-range" class="field-label">Price flexibility</label><span id="range-value">±35%</span></div>
+        <input type="range" id="price-range" min="10" max="80" step="5" value="35">
+        <p class="field-hint">Look for alternatives near your current item's price.</p>
+        <label class="toggle-row"><span>Keep the same brand</span><input id="same-brand" type="checkbox" role="switch"><span class="toggle-ui" aria-hidden="true"></span></label>
+        <label class="toggle-row"><span>Only matching SBI offers</span><input id="offers-only" type="checkbox" role="switch"><span class="toggle-ui" aria-hidden="true"></span></label>
+        <div class="sidebar-divider"></div>
+        <p class="field-label">A note on card eligibility</p>
+        <p class="field-hint">Card variants, EMI terms, minimum spend and discount caps can change eligibility. Check your exact card and the final discount at checkout.</p>
+        <a class="small-link" href="https://www.sbicard.com/en/personal/offers.page" target="_blank" rel="noopener noreferrer">SBI's current offer terms <span aria-hidden="true">↗</span></a>
+        <div class="privacy-note"><span aria-hidden="true">◈</span><p>Your cart stays in this browser. No card numbers, sign-in details or payment data are collected.</p></div>
+        <button class="clear-button" id="clear">Clear saved cart & results</button>
+      </aside>
+      <section class="results-area" aria-labelledby="results-title">
+        <div class="results-header"><div><p class="eyebrow">A BETTER MATCH, MAYBE</p><h2 id="results-title">Your cart, reconsidered</h2></div><span class="results-time" id="scan-time">Ready when you are</span></div>
+        <div id="status" class="status-box" role="status" aria-live="polite" hidden></div>
+        <div class="scan-progress" id="progress" hidden><div id="progress-bar"></div></div>
+        <button id="cancel" class="button secondary cancel-button" hidden>Stop scan</button>
+        <div id="results"></div>
+        <div id="empty-state" class="empty-state"><span class="empty-symbol" aria-hidden="true">⌑<span>✦</span></span><h3>Your next good deal is waiting.</h3><p>Open your Amazon.in cart, then scan it here.<br>We'll look for similar products and readable SBI offers.</p><a class="button secondary" href="https://www.amazon.in/gp/cart/view.html" target="_blank" rel="noopener noreferrer">Open my Amazon cart <span aria-hidden="true">↗</span></a><span class="empty-footnote">Already installed? Refresh your Amazon cart once.</span></div>
+      </section>
+    </div>
+    <section class="how-it-works" aria-label="How it works"><p class="eyebrow">THREE LITTLE STEPS</p><div><p><span>01</span><strong>Read your cart</strong> Start with products you already want.</p><p><span>02</span><strong>Compare similar finds</strong> See product-level SBI offer evidence.</p><p><span>03</span><strong>Review & switch</strong> Add your choice on Amazon, then remove the original.</p></div></section>
+    <footer><span class="footer-brand">cartwise.</span><p>An independent shopping helper. Not affiliated with Amazon or SBI.<br>Prices and offers may change. Amazon checkout determines the final benefit.</p><a href="README.md" target="_blank" rel="noopener">Setup & help ↗</a></footer>
+  </main>
+  <script defer src="core.js"></script>
+  <script defer src="parser.js"></script>
+  <script defer src="demo.js"></script>
+  <script defer src="dashboard.js"></script>
+</body>
+</html>

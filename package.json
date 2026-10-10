@@ -1,0 +1,8 @@
+{
+  "name": "cartwise-sbi-offer-finder",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Local Amazon.in cart comparisons with SBI offer evidence",
+  "scripts": {"test": "node --test tests/cartwise.test.cjs"},
+  "devDependencies": {"jsdom": "30.1.2"}
+}
